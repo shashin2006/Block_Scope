@@ -1,0 +1,325 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Event Explorer</title>
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <style>
+          :root {
+              --primary-color: #2c3e50;
+              --accent-color: #e74c3c;
+          }
+           
+
+
+
+
+
+
+
+
+
+
+
+          .hero-section {
+              height: 100vh;
+              position: relative;
+              overflow: hidden;
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+          .hero-video {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              z-index: -1;
+          }
+
+
+
+
+          .hero-content {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              color: white;
+              background: rgba(0,0,0,0.5);
+              padding: 2rem;
+              text-align: center;
+          }
+
+
+
+
+
+
+
+
+
+
+
+          .menu-section {
+              padding: 4rem 2rem;
+              background: #f8f9fa;
+          }
+
+
+
+
+
+          .category-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 2rem;
+              margin-top: 2rem;
+          }
+
+
+
+
+
+
+
+          .category-card {
+              background: white;
+              padding: 1.5rem;
+              border-radius: 10px;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease;
+          }
+
+
+
+
+
+
+
+
+          .category-card:hover {
+              transform: translateY(-5px);
+          }
+
+
+
+
+
+
+          .events-section {
+              padding: 4rem 2rem;
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          .event-cards {
+              display: flex;
+              gap: 2rem;
+              overflow-x: auto;
+              padding: 2rem 0;
+              scroll-behavior: smooth;
+          }
+
+
+
+
+
+
+
+          .event-card {
+              min-width: 300px;
+              background: white;
+              border-radius: 15px;
+              overflow: hidden;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+          .event-card img {
+              width: 100%;
+              height: 200px;
+              object-fit: cover;
+          }
+
+
+
+
+
+
+
+          .event-info {
+              padding: 1.5rem;
+          }
+
+
+
+
+
+
+
+          .filters {
+              position: fixed;
+              left: -300px;
+              top: 0;
+              width: 300px;
+              height: 100vh;
+              background: white;
+              padding: 2rem;
+              transition: 0.3s ease;
+              box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+              z-index: 1000;
+          }
+
+
+
+
+
+
+
+          .filters.active {
+              left: 0;
+          }
+
+
+
+
+
+
+
+          .filter-group {
+              margin-bottom: 1.5rem;
+          }
+
+          .filter-group h3 {
+              margin-bottom: 1rem;
+              color: var(--primary-color);
+          }
+
+          .filter-options label {
+              display: block;
+              margin: 0.5rem 0;
+              cursor: pointer;
+          }
+      </style>
+  </head>
+  <body>
+      <section class="hero-section">
+          <video class="hero-video" autoplay loop muted>
+              <source src="your-event-video.mp4" type="video/mp4">
+          </video>
+          <div class="hero-content" data-aos="fade-up">
+              <h1>Discover Events Worldwide</h1>
+              <p>Explore amazing events happening around the globe</p>
+          </div>
+      </section>
+
+      <section class="menu-section" data-aos="fade-up">
+          <h2>Browse by Category</h2>
+          <div class="category-grid">
+              <div class="category-card" data-aos="zoom-in">
+                  <h3>Hackathons</h3>
+                  <p>Coding competitions and tech innovations</p>
+              </div>
+              <div class="category-card" data-aos="zoom-in">
+                  <h3>Symposiums</h3>
+                  <p>Academic and professional conferences</p>
+              </div>
+              <div class="category-card" data-aos="zoom-in">
+                  <h3>Cultural Events</h3>
+                  <p>Explore diverse traditions worldwide</p>
+              </div>
+              <div class="category-card" data-aos="zoom-in">
+                  <h3>Tech Summits</h3>
+                  <p>Latest in technology and digital transformation</p>
+              </div>
+          </div>
+      </section>
+
+      <div class="filters" id="filters">
+          <div class="filter-group">
+              <h3>Event Type</h3>
+              <div class="filter-options">
+                  <label><input type="checkbox"> Hackathons</label>
+                  <label><input type="checkbox"> Symposiums</label>
+                  <label><input type="checkbox"> Workshops</label>
+                  <label><input type="checkbox"> Conferences</label>
+              </div>
+          </div>
+          <div class="filter-group">
+              <h3>Country</h3>
+              <div class="filter-options">
+                  <label><input type="checkbox"> United States</label>
+                  <label><input type="checkbox"> India</label>
+                  <label><input type="checkbox"> Europe</label>
+                  <label><input type="checkbox"> Asia Pacific</label>
+              </div>
+          </div>
+      </div>
+
+      <section class="events-section">
+          <h2>Featured Events</h2>
+          <div class="event-cards" data-aos="fade-left">
+              <!-- Add multiple event cards here -->
+              <div class="event-card">
+                  <img src="hackathon-image.jpg" alt="Hackathon">
+                  <div class="event-info">
+                      <h3>Global Hackathon 2024</h3>
+                      <p>48-hour coding challenge</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+          AOS.init({
+              duration: 800,
+              offset: 100,
+              once: true
+          });
+
+          function toggleFilters() {
+              document.getElementById('filters').classList.toggle('active');
+          }
+      </script>
+  </body>
+  </html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World News</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    header {
+      background-color: #000000;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+
+
+    
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .news-box {
+      background-color: #fff;
+      color: #000;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      margin: 1rem;
+      overflow: hidden;
+    }
+
+    .news-box img {
+      width: 100%;
+      height: auto;
+    }
+
+    .news-content {
+      padding: 1rem;
+      background-color: #fffbe0;
+    }
+
+    .news-content h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #000;
+    }
+
+    .news-content p {
+      margin: 0.5rem 0;
+      color: #333;
+    }
+
+    .news-content button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      border-radius: 4px;
+    }
+
+    .news-content button:hover {
+      background-color: #444;
+    }
+
+    .article-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .article-page img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+    }
+
+    .article-page h1 {
+      font-size: 2rem;
+      color: #000000;
+    }
+
+    .article-page p {
+      color: #000000;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f4f4f4;
+      padding: 10px 20px;
+      font-size: 14px;
+      
+    }
+    .top-bar .languages {
+       display: flex; 
+       align-items: center;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+    }
+    .top-bar .languages a {
+      text-decoration: none;
+      color: #333;
+    }
+    .top-bar .languages a:hover {
+      text-decoration: underline;
+    }
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #f4f4f4; /* Light grey background */
+    position: relative;
+}
+.header .logo .title {
+    font-weight: bold; /* Make text bold */
+    font-size: 80px; /* Adjust font size */
+    margin-top: 20px; /* Remove margin */
+    position: absolute; /* Position title independently */
+    left: 50%; /* Move to center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    text-align: center; /* Center text within itself */
+}
+    /* .header .logo .title {
+      font-weight: bold; 
+    text-align: center; 
+    margin: 0 auto;
+    } */
+
+    .header .logo img {
+      height: 80px;
+      margin-right: 10px;
+    }
+
+    .header .logo {
+    display: flex; /* Align the logo and title horizontally */
+    align-items: center;
+}
+
+/* .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; 
+} */
+
+.header .language {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.header .language span {
+    cursor: pointer;
+    color: #333; /* Dark grey text */
+}
+
+.header .language span:hover {
+    text-decoration: underline;
+}
+
+.header .sign-in {
+    padding: 5px 15px;
+    background-color: #333; /* Dark button */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header .sign-in:hover {
+    background-color: #555; /* Lighter grey for hover */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #333; /* Dark navbar */
+    margin-top: 1px;
+}
+
+.navbar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white; /* White text for navbar links */
+}
+
+.navbar a:hover {
+    background-color: #555; /* Hover effect */
+}
+
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="languages">
+      <a  id="en" href="#">English</a> | 
+      <a id="ta" href="#">Tamil</a> | 
+      <a id="hi" href="#">Hindi</a> | 
+      <a id="es" href="#">Spanish</a> | 
+      <a id="fr" href="#">French</a> | 
+      <a id="de" href="#">German</a> | 
+      <a id="it" href="#">Italian</a> | 
+      <a id="ja" href="#">Japanese</a>
+    </div>
+  </div>
+<div class="header">
+    <div class="logo">
+        <img src="logo.jpg" alt="Newspaper Logo">
+  <h1 class="title">The BlockScope</h1>
+    </div>
+    
+    <button class="sign-in" onclick="window.location.href='sign_in.html';">Sign In</button>
+
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="#">Home</a>
+    <a href="./worldNews.html">World</a>
+    <a href="#">Sports</a>
+    <a href="#">Entertainment</a>
+    <a href="index.html">User Analytics</a>
+    <a href="./eventpage/eventpage/updated.html">Events</a>
+</div>
+  <header>
+    <h1>World News</h1>
+  </header>
+
+  <div class="container" id="news-container">
+    <!-- News boxes will be dynamically injected here -->
+  </div>
+
+  <div class="article-page" id="article-page">
+    <h1 id="article-title"></h1>
+    <img id="article-image" src="" alt="News Image">
+    <p id="article-content"></p>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    // Display a loading screen while fetching news
+const loadingOverlay = document.createElement('div');
+loadingOverlay.style.position = 'fixed';
+loadingOverlay.style.top = '0';
+loadingOverlay.style.left = '0';
+loadingOverlay.style.width = '100%';
+loadingOverlay.style.height = '100%';
+loadingOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+loadingOverlay.style.color = '#fff';
+loadingOverlay.style.display = 'flex';
+loadingOverlay.style.alignItems = 'center';
+loadingOverlay.style.justifyContent = 'center';
+loadingOverlay.style.zIndex = '1000';
+loadingOverlay.innerText = 'Loading news, please wait...';
+document.body.appendChild(loadingOverlay);
+
+async function fetchNews() {
+  try {
+    const response = await fetch('http://localhost:3000/news/global-news');
+    const data = await response.json();
+
+    if (data.success) {
+      const newsContainer = document.getElementById('news-container');
+      data.articles.forEach((article, index) => {
+        const newsBox = document.createElement('div');
+        newsBox.className = 'news-box';
+
+        newsBox.innerHTML = `
+          <img src="${article.image || 'https://via.placeholder.com/600x400'}" alt="News Image">
+          <div class="news-content">
+            <h2>${article.title}</h2>
+            <p>${article.description}</p>
+            <button onclick="showArticle(${index})">Read More</button>
+          </div>
+        `;
+
+        newsContainer.appendChild(newsBox);
+      });
+
+      window.newsArticles = data.articles; // Store articles globally for later use
+    } else {
+      alert('Failed to fetch news!');
+    }
+  } catch (error) {
+    console.error('Error fetching news:', error);
+  } finally {
+    loadingOverlay.style.display = 'none'; // Hide the loading overlay after fetching news
+  }
+}
+
+function showArticle(index) {
+  const article = window.newsArticles[index];
+  document.getElementById('news-container').style.display = 'none';
+  const articlePage = document.getElementById('article-page');
+  articlePage.style.display = 'flex';
+
+  document.getElementById('article-title').innerText = article.title;
+  document.getElementById('article-image').src = article.image || 'https://via.placeholder.com/800x600';
+  document.getElementById('article-content').innerText = article.content || 'Content not available.';
+}
+
+function goBack() {
+  document.getElementById('article-page').style.display = 'none';
+  document.getElementById('news-container').style.display = 'flex';
+}
+
+fetchNews();
+
+  </script>
+</body>
+</html>
