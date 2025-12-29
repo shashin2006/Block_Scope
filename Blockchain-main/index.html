@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchCountryNews = async (language) => {
         try {
-          const response = await fetch(`http://localhost:3000/news/country-news?lang=${language}`);
+          const response = await fetch(`https://block-scope-1.onrender.com/news/country-news?lang=${language}`);
           const data = await response.json();
       
           if (data.success) {
@@ -531,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     const fetchGlobalNews = async (language) => {
       try {
-        const response = await fetch(`http://localhost:3000/news/global-news?lang=${language}`);
+        const response = await fetch(`https://block-scope-1.onrender.com/news/global-news?lang=${language}`);
         const data = await response.json();
   
         if (data.success) {
