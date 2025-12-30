@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Search for News Aggregator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    #results {
+      margin-top: 20px;
+    }
+    #mic-button {
+      padding: 10px 15px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Search News by Voice</h1>
+<input type="text" id="search-input" placeholder="Say something to search for news..."  readonly />
+<button id="mic-button">🎤 Speak</button>
+
+<div id="results"></div>
+
+<script>
+// Set up the voice recognition
+const micButton = document.getElementById('mic-button');
+const searchInput = document.getElementById('search-input');
+const resultsDiv = document.getElementById('results');
+
+// Check if the browser supports the Web Speech API
+if (!('webkitSpeechRecognition' in window)) {
+  alert("Sorry, your browser does not support voice recognition.");
+} else {
+  const recognition = new webkitSpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'en-US';
+
+  // Event when speech is recognized
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    searchInput.value = transcript; // Show voice input in the text field
+    performSearch(transcript); // Perform the search with the recognized text
+  };
+
+  // Event when there's an error
+  recognition.onerror = function(event) {
+    console.error('Error occurred in recognition: ' + event.error);
+  };
+
+  // Start/Stop voice recognition on button click
+  micButton.addEventListener('click', function() {
+    if (micButton.innerText === '🎤 Speak') {
+      recognition.start(); // Start listening
+      micButton.innerText = '⏹️ Stop'; // Change button text to stop
+    } else {
+      recognition.stop(); // Stop listening
+      micButton.innerText = '🎤 Speak'; // Change button text back to speak
+    }
+  });
+}
+
+// Function to perform search and display results
+async function performSearch(query) {
+  const endpoint = "http://localhost:3000/news"; // Modify with your backend URL
+  let category = '';
+  
+  
+  // Based on the query, determine category or country
+  if (query.toLowerCase().includes("sports")) {
+    category = 'sports';
+  } else if (query.toLowerCase().includes("movie") || query.toLowerCase().includes("cinema")) {
+    category = 'entertainment';
+  } else {
+    category = 'general'; // Default category
+  }
+  console.log(category);
+ 
+
+  try {
+    const response = await fetch(`${endpoint}/country-category-news?category=${category}&lang=en`);
+    const data = await response.json();
+
+    // Display results
+    if (data.success && data.articles.length > 0) {
+      resultsDiv.innerHTML = '';
+      data.articles.forEach(article => {
+        const articleDiv = document.createElement('div');
+        articleDiv.classList.add('article');
+        articleDiv.innerHTML = `
+          <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+          <p>${article.description}</p>
+          ${article.image ? `<img src="${article.image}" alt="image" style="width: 100%; max-width: 400px;">` : ''}
+        `;
+        resultsDiv.appendChild(articleDiv);
+      });
+    } else {
+      resultsDiv.innerHTML = "<p>No news found for your query.</p>";
+    }
+  } catch (error) {
+    console.error('Error fetching news:', error);
+    resultsDiv.innerHTML = "<p>Failed to fetch news.</p>";
+  }
+}
+</script>
+
+</body>
+</html>
