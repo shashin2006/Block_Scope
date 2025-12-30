@@ -241,7 +241,7 @@
     <a href="./worldNews.html">World</a>
     <a href="#">Sports</a>
     <a href="#">Entertainment</a>
-    <a href="index.html">User Analytics</a>
+    <a href="home.html">User Analytics</a>
     <a href="./eventpage/eventpage/updated.html">Events</a>
 </div>
   <header>
@@ -278,7 +278,7 @@ document.body.appendChild(loadingOverlay);
 
 async function fetchNews() {
   try {
-    const response = await fetch('http://localhost:3000/news/global-news');
+    const response = await fetch('https://block-scope-1.onrender.com/news/global-news');
     const data = await response.json();
 
     if (data.success) {
