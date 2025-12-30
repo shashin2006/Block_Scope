@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .news-card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 hover:border-news-accent hover:-translate-y-2;
+  }
+  
+  .nav-arrow {
+    @apply absolute top-1/2 transform -translate-y-1/2 bg-news-primary text-white border-none w-12 h-12 rounded-full cursor-pointer flex items-center justify-center text-lg transition-all duration-300 shadow-md hover:bg-news-accent hover:scale-110 z-10;
+  }
+  
+  .nav-arrow:disabled {
+    @apply bg-gray-400 cursor-not-allowed transform -translate-y-1/2 scale-90;
+  }
+  
+  .nav-arrow.prev {
+    @apply -left-4;
+  }
+  
+  .nav-arrow.next {
+    @apply -right-4;
+  }
+  
+  .section-header {
+    @apply flex justify-between items-center mb-8 pb-4;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold text-news-primary relative pl-4;
+  }
+  
+  .section-title::before {
+    content: '';
+    @apply absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-news-highlight rounded;
+  }
+  
+  .language-btn {
+    @apply text-white no-underline px-3 py-1.5 rounded-full bg-white bg-opacity-10 transition-all duration-300 font-medium text-sm hover:bg-news-accent hover:-translate-y-0.5;
+  }
+  
+  .language-btn.active {
+    @apply bg-news-accent;
+  }
+}
